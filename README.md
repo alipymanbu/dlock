@@ -1,35 +1,24 @@
-# dlock
+# DLock
 
-Distributed-Lock-as-a-Service implemented on Cloudflare Durable Objects. A more correct & scalable implementation of [this HN post](https://news.ycombinator.com/item?id=31764026).
+本仓库是「DLock」的安卓版本获取入口，附使用资料索引。
 
-## Usage
+## 安装文件资源（夸克网盘）
 
-```
-# Acquire a lock.
-# The UUID path segment is the lock ID - choose your own.
-$ curl "https://dlock.univalent.net/lock/01899dc0-2742-44f9-9c7b-01830851b299/acquire?ttl=60"
-{"lease":1,"deadline":1655572186}
+> **DLock 安装文件资源（夸克网盘）**：[https://pan.quark.cn/s/a5ce1adfd1d4](https://pan.quark.cn/s/a5ce1adfd1d4)
 
-# Another attempt to acquire the same lock within its TTL will fail with HTTP status code 409.
-$ curl "https://dlock.univalent.net/lock/01899dc0-2742-44f9-9c7b-01830851b299/acquire?ttl=60"
-{"error":"lock is acquired by another client","deadline":1655572186}
+## 官方项目
 
-# But the previous lock can be renewed with its lease number.
-$ curl "https://dlock.univalent.net/lock/01899dc0-2742-44f9-9c7b-01830851b299/acquire?ttl=60&lease=1"
-{"lease":1,"deadline":1655572824}
+- 上游项目：[losfair/dlock](https://github.com/losfair/dlock)
 
-# Release a lock.
-$ curl "https://dlock.univalent.net/lock/01899dc0-2742-44f9-9c7b-01830851b299/release?lease=42"
-{}
+## 更多资料
 
-# Releasing a lock with an outdated lease number will fail with HTTP status code 409.
-$ curl "https://dlock.univalent.net/lock/01899dc0-2742-44f9-9c7b-01830851b299/release?lease=41"
-{"error":"the provided lease is no longer valid"}
-```
+- [下载与安装教程](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/DLock/%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.md)
+- [家人租客权限设置](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/DLock/%E5%AE%B6%E4%BA%BA%E7%A7%9F%E5%AE%A2%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE.md)
+- [常见问题与排查](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/DLock/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E6%8E%92%E6%9F%A5.md)
+- [苹果版和安卓版的区别](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/DLock/%E8%8B%B9%E6%9E%9C%E7%89%88%E5%92%8C%E5%AE%89%E5%8D%93%E7%89%88%E7%9A%84%E5%8C%BA%E5%88%AB.md)
+- [连接门锁与开锁方式](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/DLock/%E8%BF%9E%E6%8E%A5%E9%97%A8%E9%94%81%E4%B8%8E%E5%BC%80%E9%94%81%E6%96%B9%E5%BC%8F.md)
+- [全部软件目录](https://github.com/alipymanbu/Android/blob/master/%E5%85%A8%E9%83%A8%E8%BD%AF%E4%BB%B6%E7%9B%AE%E5%BD%95.md)
 
-## System properties
+---
 
-- Provides monotonic lease numbers that can be used as fencing tokens.
-- Locks that haven't been used for more than 7 days will be removed.
-
-[GitHub](https://github.com/losfair/dlock)
+> 本仓库由上游项目 fork 而来，原始说明见[上游仓库](https://github.com/losfair/dlock)。
